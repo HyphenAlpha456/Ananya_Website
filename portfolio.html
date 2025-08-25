@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+    ULTRA-ROBUST 3D ROMANTIC SITE (FIXED)
+
+    Modifications in this file:
+    - Timeline images replaced with Font Awesome icons (no missing images).
+    - "My Promise" paragraph expanded to fill the card.
+    - Nothing else changed from your provided code.
+  -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>For My Love • 397 days 💘</title>
+  <meta name="theme-color" content="#ff4d6d" />
+
+  <!-- External styles (CDNs) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ======================================================================= */
+    /*  THEME & LAYOUT                                                         */
+    /* ======================================================================= */
+
+    :root{
+      --rose: #ff4d6d;
+      --rose-2: #ff8199;
+      --bg: #0b0b15;
+      --text: #f5f5f7;
+      --muted: #c7c7cf;
+      --glass: rgba(255,255,255,0.10);
+      --card: rgba(255,255,255,0.08);
+      --surface: rgba(255,255,255,0.06);
+      --gradient: radial-gradient(1200px 600px at 20% -10%, #ffb3c1 0%, transparent 60%),
+                  radial-gradient(1200px 600px at 80% -20%, #ffe5ec 0%, transparent 60%),
+                  linear-gradient(180deg, #0a0a14 0%, #0b0b15 100%);
+    }
+
+    [data-theme="light"]{
+      --bg: #fff8fb;
+      --text: #18181b;
+      --muted: #5e5e68;
+      --glass: rgba(255,255,255,0.85);
+      --card: rgba(255,255,255,0.7);
+      --surface: rgba(255,255,255,0.6);
+      --gradient: radial-gradient(1400px 700px at 15% -10%, #ffe3eb 0%, transparent 60%),
+                  radial-gradient(1400px 700px at 85% -20%, #fff1f5 0%, transparent 60%),
+                  linear-gradient(180deg, #fff8fb 0%, #ffffff 100%);
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--gradient);
+      color: var(--text);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* ======================================================================= */
+    /*  HERO                                                                     */
+    /* ======================================================================= */
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      overflow: clip;
+      display: grid;
+      place-items: center;
+      padding: 36px 16px;
+      box-sizing: border-box;
+    }
+
+    .hero::before{
+      content: "";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background: radial-gradient(1000px 600px at var(--mx,50%) var(--my,30%), rgba(255,77,109,.18), transparent 70%);
+      transition: opacity .3s ease;
+    }
+
+    .glass {
+      background: var(--glass);
+      backdrop-filter: blur(12px) saturate(120%);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 24px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+    }
+
+    .title { font-family: "Playfair Display", serif; letter-spacing:.2px; font-size: clamp(2.2rem, 4vw + 1rem, 4.2rem); line-height: 1.08; margin: 0; }
+    .subtitle { font-size: clamp(0.98rem, 1vw + .6rem, 1.2rem); color: var(--muted); margin-bottom: 0; }
+
+    .btn-rose {
+      background: linear-gradient(135deg,var(--rose),var(--rose-2));
+      border:none; color:#fff;
+      padding:.78rem 1.12rem; border-radius:14px; font-weight:700;
+      box-shadow: 0 10px 30px rgba(255,77,109,0.35);
+    }
+
+    .btn-ghost { border:1px solid rgba(255,255,255,.18); color:var(--text); padding:.72rem 1rem; border-radius:12px; background:transparent; }
+
+    /* ======================================================================= */
+    /*  BACKGROUND HEARTS CANVAS                                                 */
+    /* ======================================================================= */
+
+    #heartsCanvas{ position:absolute; inset:0; z-index:0; opacity:.65; pointer-events:none; }
+
+    /* ======================================================================= */
+    /*  CONTENT SECTIONS                                                         */
+    /* ======================================================================= */
+
+    .content-section{ padding: clamp(48px,6vw,96px) 0; position:relative; z-index:1; }
+
+    .card-glow{ background: var(--card); border:1px solid rgba(255,255,255,0.12); border-radius:20px; transition: transform .2s, box-shadow .2s; }
+    .card-glow:hover{ transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.35); }
+
+    /* ======================================================================= */
+    /*  TIMELINE, GALLERY SUMMARY                                                */
+    /* ======================================================================= */
+
+    .timeline{ position:relative; }
+    .timeline::before{ content:""; position:absolute; left:calc(50% - 2px); top:0; bottom:0; width:4px; background:linear-gradient(var(--rose), transparent); opacity:.35; }
+    .tl-item{ display:grid; grid-template-columns: repeat(2, 1fr); gap:1rem; margin-bottom:2rem; align-items:center; }
+    .tl-card{ padding:1rem; }
+
+    /* new icon box for timeline entries */
+    .tl-icon {
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      width:110px;
+      height:110px;
+      border-radius:18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255,255,255,0.04);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.24);
+      color: var(--rose);
+      font-size: 38px;
+    }
+
+    .tl-icon i{ display:block; transform: translateY(2px); }
+
+    @media(max-width: 768px){
+      .tl-item{ grid-template-columns: 1fr; gap: .6rem; }
+      .tl-icon{ width:64px; height:64px; font-size:22px; border-radius:12px; }
+      .tl-card{ padding:.8rem; }
+      .timeline::before{ left:12px; }
+    }
+
+    .divider{ height:1px; background:linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent); margin:18px 0; }
+
+    /* ======================================================================= */
+    /*  3D GALLERY STYLES                                                       */
+    /* ======================================================================= */
+
+    /* Modal container for the full-screen gallery */
+    #galleryModal{
+      position: fixed; inset:0; z-index: 1400; display:none; align-items:center; justify-content:center; overflow:hidden;
+      background: radial-gradient(1200px 600px at 50% -10%, rgba(255,179,193,.12), transparent 60%), rgba(0,0,0,.82);
+      backdrop-filter: blur(6px);
+    }
+
+    #galleryModal.active{ display:flex; }
+
+    .gm-header{
+      position:absolute; top:0; left:0; right:0; display:flex; align-items:center; justify-content:space-between; gap:.5rem; padding: 12px 18px; z-index:1450;
+    }
+
+    .gm-title{ font-family:"Playfair Display", serif; font-size:1.15rem; color:var(--text); }
+
+    .stage{ position: absolute; inset: 0; display:grid; place-items:center; perspective: 1600px; }
+
+    .ring{
+      position: relative; width: min(88vw, 1300px); height: min(68vh, 840px);
+      transform-style: preserve-3d; transition: transform .6s cubic-bezier(.2,.9,.2,1);
+      touch-action: none;
+    }
+
+    .card3d{
+      position:absolute; top:50%; left:50%; transform-style: preserve-3d; width: clamp(180px, 18vw, 300px); height: clamp(120px, 14vw, 220px);
+      border-radius: 18px; overflow:hidden; box-shadow: 0 16px 60px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.06);
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.04)); cursor: grab; user-select:none;
+    }
+
+    .card3d:active{ cursor:grabbing; }
+
+    .card3d img{ width:100%; height:100%; object-fit:cover; display:block; transform: translateZ(2px); backface-visibility:hidden; }
+
+    .card3d .badge{ position:absolute; top:10px; right:10px; background: rgba(0,0,0,.45); color:#fff; font-size:.8rem; padding:.28rem .52rem; border-radius:999px; }
+
+    /* subtle bobbing animation for depth */
+    @keyframes bob { 0%,100%{ transform: translateZ(2px) translateY(0); } 50%{ transform: translateZ(2px) translateY(-6px);} }
+    .card3d img{ animation: bob 5.2s ease-in-out infinite; }
+
+    /* controls area */
+    .gm-controls{ position:absolute; bottom: 18px; left:50%; transform: translateX(-50%); display:flex; gap:.5rem; z-index:1450; }
+
+    /* Lightbox */
+    .lightbox{ position:fixed; inset:0; background:rgba(0,0,0,.9); display:none; align-items:center; justify-content:center; z-index:2000; }
+    .lightbox.active{ display:flex; }
+    .lightbox img{ max-width:92vw; max-height:86vh; border-radius:16px; box-shadow:0 20px 80px rgba(0,0,0,.6); }
+
+    /* small responsive tweaks */
+    @media(max-width:880px){ .ring{ width: 94vw; height: 66vh; } .card3d{ width: clamp(160px, 40vw, 260px); height: clamp(110px, 36vw, 180px);} }
+
+    /* ======================================================================= */
+    /*  MISC STYLES                                                             */
+    /* ======================================================================= */
+
+    .music-pill{ position: fixed; bottom:20px; right:20px; z-index:1600; }
+
+    footer { padding-bottom: 40px; }
+
+    /* make sure modal covers everything when open */
+    .no-scroll { overflow: hidden !important; }
+
+    /* ======================================================================= */
+    /*  END OF CSS                                                              */
+    /* ======================================================================= */
+  </style>
+</head>
+<body>
+
+  <!-- CONFIG: Edit these values to customize names, start date, photos, music -->
+  <script>
+    const CONFIG = {
+      YOUR_NAME: "You",
+      PARTNER_NAME: "My Love",
+      START_DATE_ISO: "2024-07-24T00:00:00+05:30",
+      PHOTOS: Array.from({length:39}, (_,i)=>`images/${i+1}.jpg`),
+      MUSIC_SRC: "", // e.g. 'song.mp3' or full URL
+      NEXT_MILESTONES: [400, 500, 730, 1000, 1500]
+    };
+  </script>
+
+  <!-- HERO -->
+  <section class="hero" id="home" aria-label="Hero">
+    <canvas id="heartsCanvas" aria-hidden="true"></canvas>
+
+    <div class="container position-relative" style="z-index:1">
+      <div class="row justify-content-center">
+        <div class="col-lg-9">
+          <div class="glass p-4 p-md-5 text-center">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <div class="small text-uppercase fw-semibold opacity-75"><i class="fa-solid fa-infinity me-2"></i>Together, Always</div>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="themeSwitch" aria-label="Toggle theme">
+                <label class="form-check-label" for="themeSwitch"><i class="fa-solid fa-sun"></i></label>
+              </div>
+            </div>
+
+            <h1 class="title mb-2">For <span id="partnerName">My Love</span></h1>
+            <p class="subtitle mb-4">Our story in moments, memories, and a million little heartbeats.</p>
+
+            <div class="row g-3 justify-content-center">
+              <div class="col-12 col-md-4">
+                <div class="card-glow p-3 h-100">
+                  <div class="d-flex align-items-center justify-content-center gap-2">
+                    <i class="fa-solid fa-heart fa-lg" aria-hidden="true"></i>
+                    <div>
+                      <div class="small text-uppercase opacity-75">Days Together</div>
+                      <div class="fs-3 fw-bold" id="daysTogether">397</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 col-md-4">
+                <div class="card-glow p-3 h-100">
+                  <div class="d-flex align-items-center justify-content-center gap-2">
+                    <i class="fa-solid fa-bell fa-lg" aria-hidden="true"></i>
+                    <div>
+                      <div class="small text-uppercase opacity-75">Next Milestone</div>
+                      <div class="fw-bold" id="nextMilestoneText">Loading…</div>
+                      <div class="small opacity-75" id="milestoneCountdown">—</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex gap-2 justify-content-center mt-4">
+              <button class="btn btn-rose" id="openGalleryBtn" aria-haspopup="dialog" aria-controls="galleryModal"><i class="fa-solid fa-images me-2"></i>Open Gallery</button>
+              <a href="#notes" class="btn btn-ghost"><i class="fa-solid fa-quote-left me-2"></i>Love Notes</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT / NOTES -->
+  <section class="content-section" id="notes">
+    <div class="container">
+      <div class="row g-4 align-items-stretch">
+        <div class="col-lg-6">
+          <div class="card-glow h-100 p-4 p-md-5">
+            <h2 class="mb-3" style="font-family: 'Playfair Display', serif;">My Promise</h2>
+            <p class="note">
+              I’ll hold your hand through the sunshine and the storms, save the last bite for you, listen to your dreams in the quiet hours, and love you a little more every day.
+              I promise to celebrate the ordinary with you, to make ordinary moments feel like small, private holidays — a shared coffee, a lazy Sunday, a comforting hug after a long day.
+              I promise to be patient when the world is impatient, to be kind when the world is harsh, and to choose compassion over being right whenever our hearts need it most.
+              I promise to laugh with you until our sides ache, to dry your tears when they fall, and to offer steadiness and warmth when you feel uncertain.
+              I promise to learn from our mistakes, to grow with curiosity, and to always make room for the dreams you carry inside you.
+              I promise to keep discovering you — the small things, the quiet things, the sudden, surprising things — and to tell you, every day, that you are seen, wanted, and infinitely loved.
+              Here’s to us — to day <span class="fw-bold" id="daysBold">397</span>, to a thousand tomorrows, and to a love that keeps choosing you, over and over, for all the days to come.
+            </p>
+            <div class="divider"></div>
+            <div class="d-flex gap-2 flex-wrap">
+              <button class="btn btn-rose" id="shareBtn"><i class="fa-solid fa-share-nodes me-2"></i>Share This</button>
+              <button class="btn btn-ghost" id="toggleMusic"><i class="fa-solid fa-music me-2"></i>Play Music</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="card-glow h-100 p-4 p-md-5">
+            <h2 class="mb-3" style="font-family: 'Playfair Display', serif;">Our Timeline</h2>
+            <div class="timeline">
+
+              <div class="tl-item">
+                <div class="tl-card glass">
+                  <div class="small opacity-75">Day 1</div>
+                  <div class="fw-bold">We began</div>
+                  <div class="text-muted">A hello that turned into a forever.</div>
+                </div>
+
+                <!-- replaced image with icon -->
+                <div class="tl-icon" aria-hidden="true" title="Start">
+                  <i class="fa-solid fa-handshake"></i>
+                </div>
+              </div>
+
+              <div class="tl-item">
+                <!-- replaced image with icon (keeps order-lg-2) -->
+                <div class="tl-icon order-lg-2" aria-hidden="true" title="Laughter">
+                  <i class="fa-solid fa-face-laugh"></i>
+                </div>
+
+                <div class="tl-card glass order-lg-1">
+                  <div class="small opacity-75">Day 100</div>
+                  <div class="fw-bold">A hundred sunsets</div>
+                  <div class="text-muted">And each one better than the last because of you.</div>
+                </div>
+              </div>
+
+              <div class="tl-item">
+                <div class="tl-card glass">
+                  <div class="small opacity-75">Day 200</div>
+                  <div class="fw-bold">Home in your smile</div>
+                  <div class="text-muted">We learned each other’s rhythms and little joys.</div>
+                </div>
+
+                <!-- replaced image with icon -->
+                <div class="tl-icon" aria-hidden="true" title="200 Days">
+                  <i class="fa-solid fa-calendar-days"></i>
+                </div>
+              </div>
+
+              <div class="tl-item">
+                <!-- replaced image with icon (keeps order-lg-2) -->
+                <div class="tl-icon order-lg-2" aria-hidden="true" title="Now">
+                  <i class="fa-solid fa-heart"></i>
+                </div>
+
+                <div class="tl-card glass order-lg-1">
+                  <div class="small opacity-75">Day <span id="todayDay">397</span></div>
+                  <div class="fw-bold">Right now</div>
+                  <div class="text-muted">I love you more than ever.</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FULL-SCREEN 3D GALLERY MODAL -->
+  <div id="galleryModal" role="dialog" aria-modal="true" aria-hidden="true">
+
+    <div class="gm-header">
+      <div class="gm-title"><i class="fa-solid fa-images me-2"></i>Our 3D Gallery</div>
+      <div class="d-flex gap-2">
+        <button class="btn btn-ghost" id="zoomOutBtn" title="Zoom Out" aria-label="Zoom out"><i class="fa-solid fa-magnifying-glass-minus"></i></button>
+        <button class="btn btn-ghost" id="zoomInBtn" title="Zoom In" aria-label="Zoom in"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+        <button class="btn btn-ghost" id="pauseBtn" title="Pause/Play Rotation" aria-label="Pause or play"><i class="fa-solid fa-pause"></i></button>
+        <button class="btn btn-rose" id="closeGalleryBtn" title="Close gallery" aria-label="Close gallery"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+    </div>
+
+    <div class="stage">
+      <div class="ring" id="ring" tabindex="0" aria-label="3D photo ring"></div>
+      <div class="gm-controls">
+        <button class="btn btn-ghost" id="prevRing" title="Rotate left"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="btn btn-ghost" id="nextRing" title="Rotate right"><i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- LIGHTBOX for selected image -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+    <button class="btn btn-ghost position-absolute top-0 end-0 m-3" id="closeLightbox" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+    <button class="btn btn-ghost position-absolute top-50 start-0 translate-middle-y ms-3" id="prevBtn" aria-label="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+    <img id="lightboxImg" alt="Zoomed photo" />
+    <button class="btn btn-ghost position-absolute top-50 end-0 translate-middle-y me-3" id="nextBtn" aria-label="Next"><i class="fa-solid fa-chevron-right"></i></button>
+  </div>
+
+  <!-- MUSIC -->
+  <div class="music-pill">
+    <audio id="bgm" loop preload="auto"></audio>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="content-section pt-0">
+    <div class="container">
+      <div class="card-glow p-4 p-md-5 text-center">
+        <div class="mb-2"><i class="fa-solid fa-heart me-2"></i><strong><span id="youName">Agni</span></strong> × <strong><span id="herName">Anu</span></strong></div>
+        <div class="small text-muted">Made with love • <span id="yearSpan"></span></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- External JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- ====================================================================== -->
+  <!--  MAIN JAVASCRIPT - everything runs after DOMContentLoaded to avoid bugs -->
+  <!-- ====================================================================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+
+      // Utility selectors
+      const $ = (sel, ctx=document)=> ctx.querySelector(sel);
+      const $$ = (sel, ctx=document)=> Array.from((ctx||document).querySelectorAll(sel));
+
+      // ---------- Theme initialization ----------
+      function setTheme(light){
+        document.documentElement.setAttribute('data-theme', light ? 'light' : 'dark');
+        const th = $('#themeSwitch'); if(th) th.checked = light;
+        localStorage.setItem('romance_theme', light? 'light':'dark');
+      }
+      (function initTheme(){
+        const pref = localStorage.getItem('romance_theme');
+        const mql = window.matchMedia('(prefers-color-scheme: light)');
+        setTheme(pref ? pref==='light' : mql.matches);
+      })();
+      $('#themeSwitch')?.addEventListener('change', (e)=> setTheme(e.target.checked));
+
+      // ---------- Basic text content ----------
+      $('#partnerName').textContent = CONFIG.PARTNER_NAME;
+      $('#youName').textContent = CONFIG.YOUR_NAME;
+      $('#herName').textContent = CONFIG.PARTNER_NAME;
+      $('#yearSpan').textContent = new Date().getFullYear();
+
+      // ---------- Day counter ----------
+      function parseKolkataISO(iso){ return new Date(iso); }
+      const startDate = parseKolkataISO(CONFIG.START_DATE_ISO);
+      function daysBetween(a,b){ return Math.floor((b - a) / (1000*60*60*24)); }
+
+      function updateCounters(){
+        const now = new Date();
+        const d = daysBetween(startDate, now);
+        $('#daysTogether').textContent = d.toString();
+        $('#daysBold').textContent = d.toString();
+        $('#todayDay').textContent = d.toString();
+
+        const next = CONFIG.NEXT_MILESTONES.find(x=> x>d) ?? (Math.ceil(d/500)*500 + 500);
+        $('#nextMilestoneText').textContent = `${next} days`;
+        const target = new Date(startDate.getTime() + next*86400000);
+        const remain = target - now;
+        const dd = Math.max(0, Math.ceil(remain/86400000));
+        $('#milestoneCountdown').textContent = dd>0 ? `${dd} days to go` : `We made it!`;
+      }
+      updateCounters();
+      setInterval(updateCounters, 1000);
+
+      // ---------- Hearts background ----------
+      const cvs = $('#heartsCanvas');
+      const ctx = cvs.getContext('2d');
+      let W=0, H=0, hearts=[];
+      function onResize(){ W = cvs.width = window.innerWidth; H = cvs.height = window.innerHeight; }
+      window.addEventListener('resize', onResize); onResize();
+
+      function makeHeart(){ return { x: Math.random()*W, y: H + 20, s: 6 + Math.random()*10, vy: 0.6 + Math.random()*1.1, vx: (Math.random()-0.5)*0.7, a: 0.5 + Math.random()*0.5 }; }
+      for(let i=0;i<36;i++) hearts.push(makeHeart());
+
+      function drawHeart(x,y,s,alpha){ ctx.save(); ctx.translate(x,y); ctx.scale(s/24, s/24); ctx.globalAlpha = alpha; ctx.beginPath(); for(let t=0;t<Math.PI*2; t+=0.05){ const xx = 16*Math.sin(t)**3; const yy = 13*Math.cos(t) - 5*Math.cos(2*t) - 2*Math.cos(3*t) - Math.cos(4*t); if(t===0) ctx.moveTo(xx, -yy); else ctx.lineTo(xx, -yy); } ctx.closePath(); ctx.fillStyle='rgba(255,77,109,.85)'; ctx.fill(); ctx.restore(); }
+
+      function tick(){ ctx.clearRect(0,0,W,H); hearts.forEach(h=>{ h.x += h.vx; h.y -= h.vy; h.a -= 0.002; if(h.a<=0 || h.y < -30) Object.assign(h, makeHeart()); drawHeart(h.x,h.y,h.s,Math.max(0,h.a)); }); requestAnimationFrame(tick); }
+      tick();
+
+      document.addEventListener('pointermove', e=>{ const hero = document.querySelector('.hero'); if(hero) { hero.style.setProperty('--mx', e.clientX+'px'); hero.style.setProperty('--my', e.clientY+'px'); } });
+
+      // ---------- GALLERY: variables & safety flags ----------
+      const ring = $('#ring');
+      const photos = Array.isArray(CONFIG.PHOTOS) && CONFIG.PHOTOS.length ? CONFIG.PHOTOS.slice() : [];
+
+      let angle = 0;               // rotation state
+      let radius = Math.round(Math.min(window.innerWidth*0.55, 640)); // default radius
+      let autoRotate = true;       // autoplay flag
+      let speed = 0.28;            // degrees per frame (multiplied)
+      let loopStarted = false;     // ensure animation loop starts once
+      let dragging = false;
+      let lastX = 0;
+
+      // Helper: clamp
+      const clamp = (v, a, b)=> Math.max(a, Math.min(b, v));
+
+      // ---------- placeCards: create ring elements ----------
+      function placeCards(){
+        // Important: clear existing cards to avoid duplicates
+        if(!ring) return;
+        while(ring.firstChild) ring.removeChild(ring.firstChild);
+
+        const n = photos.length;
+        if(n===0) return;
+        const step = 360 / n;
+
+        for(let i=0;i<n;i++){
+          const theta = step * i + angle;
+
+          const card = document.createElement('div');
+          card.className = 'card3d';
+          card.setAttribute('data-index', i);
+
+          const img = document.createElement('img');
+          img.src = photos[i];
+          img.alt = `Memory ${i+1}`;
+          img.loading = 'lazy';
+
+          const badge = document.createElement('span');
+          badge.className = 'badge';
+          badge.innerHTML = `<i class='fa-solid fa-heart'></i> ${i+1}/${n}`;
+
+          card.appendChild(img);
+          card.appendChild(badge);
+
+          // initial transform
+          card.style.transform = `translate(-50%,-50%) rotateY(${theta}deg) translateZ(${radius}px)`;
+
+          // pointer effects: tilt on hover
+          let hoverResetTimer = null;
+          card.addEventListener('pointermove', (ev)=>{
+            const rect = card.getBoundingClientRect();
+            const x = (ev.clientX - rect.left)/rect.width - 0.5; // -0.5..0.5
+            const y = (ev.clientY - rect.top)/rect.height - 0.5;
+            // small tilt
+            card.style.transform = `translate(-50%,-50%) rotateY(${theta + angle}deg) translateZ(${radius}px) rotateX(${(-y*7).toFixed(2)}deg) rotateY(${(x*10).toFixed(2)}deg)`;
+            if(hoverResetTimer) clearTimeout(hoverResetTimer);
+            hoverResetTimer = setTimeout(()=>{
+              card.style.transform = `translate(-50%,-50%) rotateY(${theta + angle}deg) translateZ(${radius}px)`;
+            }, 220);
+          });
+
+          card.addEventListener('pointerleave', ()=>{
+            card.style.transform = `translate(-50%,-50%) rotateY(${theta + angle}deg) translateZ(${radius}px)`;
+          });
+
+          // click -> open lightbox
+          card.addEventListener('click', (ev)=>{
+            openLightbox(i);
+          });
+
+          ring.appendChild(card);
+        }
+      }
+
+      // ---------- rotateRing: update transforms of each card ----------
+      function rotateRing(delta){
+        angle = (angle + delta) % 360;
+        const cards = $$('.card3d', ring);
+        const n = cards.length;
+        if(n===0) return;
+        const step = 360 / n;
+        cards.forEach((card, idx)=>{
+          const theta = step * idx + angle;
+          card.style.transform = `translate(-50%,-50%) rotateY(${theta}deg) translateZ(${radius}px)`;
+        });
+      }
+
+      // ---------- animation loop: only start once ----------
+      function animationLoop(){
+        if(autoRotate) rotateRing(speed);
+        requestAnimationFrame(animationLoop);
+      }
+
+      function startLoopOnce(){
+        if(loopStarted) return;
+        loopStarted = true;
+        requestAnimationFrame(animationLoop);
+      }
+
+      // ---------- Drag to rotate logic ----------
+      function onPointerDown(e){
+        dragging = true; lastX = e.clientX; ring.setPointerCapture?.(e.pointerId);
+        autoRotate = false;
+      }
+      function onPointerMove(e){
+        if(!dragging) return;
+        const dx = e.clientX - lastX; lastX = e.clientX;
+        // rotate opposite to drag direction for natural feel
+        rotateRing(dx * -0.28);
+      }
+      function onPointerUp(e){ dragging = false; try{ ring.releasePointerCapture?.(e.pointerId); }catch(e){} autoRotate = true; }
+
+      // bind pointer handlers safely
+      if(ring){
+        ring.addEventListener('pointerdown', onPointerDown);
+        ring.addEventListener('pointermove', onPointerMove);
+        ring.addEventListener('pointerup', onPointerUp);
+        ring.addEventListener('pointercancel', onPointerUp);
+      }
+
+      // ---------- Wheel to zoom ----------
+      function onWheel(e){
+        e.preventDefault();
+        radius += e.deltaY * 0.45; // zoom factor
+        radius = clamp(radius, 380, 1400);
+        placeCards();
+      }
+      ring?.addEventListener('wheel', onWheel, { passive:false });
+
+      // ---------- Control buttons binding (safe) ----------
+      const btnPrev = $('#prevRing');
+      const btnNext = $('#nextRing');
+      const btnZoomIn = $('#zoomInBtn');
+      const btnZoomOut = $('#zoomOutBtn');
+      const btnPause = $('#pauseBtn');
+      const btnOpen = $('#openGalleryBtn');
+      const btnClose = $('#closeGalleryBtn');
+
+      btnPrev?.addEventListener('click', ()=> rotateRing(-360/(photos.length||1)));
+      btnNext?.addEventListener('click', ()=> rotateRing( 360/(photos.length||1)));
+      btnZoomIn?.addEventListener('click', ()=>{ radius = clamp(radius - 80, 380, 1400); placeCards(); });
+      btnZoomOut?.addEventListener('click', ()=>{ radius = clamp(radius + 80, 380, 1400); placeCards(); });
+      btnPause?.addEventListener('click', (e)=>{ autoRotate = !autoRotate; const i = e.currentTarget.querySelector('i'); if(i) i.className = `fa-solid ${autoRotate? 'fa-pause' : 'fa-play'}`; });
+
+      // ---------- Modal open/close logic ----------
+      const galleryModal = $('#galleryModal');
+      function openGallery(){
+        if(!galleryModal) return;
+        galleryModal.classList.add('active');
+        galleryModal.setAttribute('aria-hidden', 'false');
+        document.documentElement.classList.add('no-scroll');
+        placeCards();
+        // Start loop only once
+        startLoopOnce();
+      }
+      function closeGallery(){
+        if(!galleryModal) return;
+        galleryModal.classList.remove('active');
+        galleryModal.setAttribute('aria-hidden', 'true');
+        document.documentElement.classList.remove('no-scroll');
+      }
+
+      btnOpen?.addEventListener('click', openGallery);
+      btnClose?.addEventListener('click', closeGallery);
+
+      // close on backdrop click
+      galleryModal?.addEventListener('click', (e)=>{ if(e.target === galleryModal) closeGallery(); });
+
+      // close on Escape
+      document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ if($('#lightbox')?.classList.contains('active')) closeLightbox(); else if(galleryModal?.classList.contains('active')) closeGallery(); } });
+
+      // ---------- Lightbox functions ----------
+      const lightbox = $('#lightbox');
+      const lbImg = $('#lightboxImg');
+      let currentIndex = 0;
+
+      function openLightbox(idx){
+        currentIndex = idx % photos.length;
+        if(!lightbox) return;
+        lbImg.src = photos[currentIndex];
+        lightbox.classList.add('active');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.documentElement.classList.add('no-scroll');
+      }
+      function closeLightbox(){ if(!lightbox) return; lightbox.classList.remove('active'); lightbox.setAttribute('aria-hidden', 'true'); document.documentElement.classList.remove('no-scroll'); }
+      function lbPrev(){ currentIndex = (currentIndex - 1 + photos.length) % photos.length; lbImg.src = photos[currentIndex]; }
+      function lbNext(){ currentIndex = (currentIndex + 1) % photos.length; lbImg.src = photos[currentIndex]; }
+
+      $('#closeLightbox')?.addEventListener('click', closeLightbox);
+      $('#prevBtn')?.addEventListener('click', lbPrev);
+      $('#nextBtn')?.addEventListener('click', lbNext);
+      lightbox?.addEventListener('click', (e)=>{ if(e.target === lightbox) closeLightbox(); });
+
+      // ---------- Controls for sharing and music ----------
+      $('#shareBtn')?.addEventListener('click', async ()=>{
+        const d = $('#daysTogether')?.textContent || '';
+        const data = { title: 'Us', text: `Celebrating ${d} days together 💖`, url: location.href };
+        if(navigator.share){ try{ await navigator.share(data); }catch(e){} }
+        else { try{ await navigator.clipboard.writeText(`${data.text} - ${data.url}`); alert('Copied a cute message to clipboard!'); } catch(e){ alert('Share: copy to clipboard failed.'); } }
+      });
+
+       const bgm = $('#bgm');
+      if(CONFIG.MUSIC_SRC && bgm){ bgm.src = CONFIG.MUSIC_SRC; }
+      let isPlaying = false;
+      async function toggleMusic(){ if(!bgm?.src){ alert('Add a song: set CONFIG.MUSIC_SRC to a local file/URL in the CONFIG block.'); return; } try{ if(isPlaying){ bgm.pause(); isPlaying=false; } else { await bgm.play(); isPlaying=true; } }catch(err){ console.warn('Music play failed:', err); } }
+      $('#toggleMusic')?.addEventListener('click', toggleMusic);
+
+      // ---------- Initialize: place cards but don't show gallery until opened ----------
+      placeCards();
+
+      // Start loop only when user opens gallery (or the function startLoopOnce is called)
+      // But for a better feel, we'll start loop in background so transform updates are smooth
+      // We'll call startLoopOnce automatically now so user sees gentle rotation when they open
+      startLoopOnce();
+
+      // ---------- Responsive handling: recalc radius and place cards on resize ----------
+      let resizeTimer = null;
+      window.addEventListener('resize', ()=>{
+        radius = Math.round(Math.min(window.innerWidth*0.55, 640));
+        if(resizeTimer) clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(()=>{ placeCards(); }, 220);
+      });
+
+      // ==================================================================
+      // Safety: ensure no duplicate event listeners if this script is executed more than once
+      // (This single-file approach should only run once, but being defensive helps.)
+      // ==================================================================
+
+    }); // DOMContentLoaded
+  </script>
+
+</body>
+</html>
